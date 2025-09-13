@@ -1,25 +1,35 @@
 import React, { useState } from "react";
 import { MenuIcon } from "./Icon";
+import "../styles/maincontent.css";
+import { useTheme } from "../context/ThemeContext";
+import type  { Theme } from "../context/ThemeContext";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 interface MainContentProps {
   toggleSidebar: () => void;
 }
+
+const themes: { id: Theme; label: string; emoji: string }[] = [
+  { id: "dark", label: "Dark", emoji: "🌑" },
+  { id: "light", label: "Light", emoji: "☀️" },
+  { id: "pink", label: "Pink", emoji: "🌸" },
+  { id: "lightgreen", label: "Light Green", emoji: "🌿" },
+];
 
 const MainContent: React.FC<MainContentProps> = ({ toggleSidebar }) => {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([
     { sender: "bot", text: "Hello Aman 👋, ask me anything!" },
   ]);
   const [input, setInput] = useState("");
+   const { theme, setTheme } = useTheme();
 
   const sendMessage = () => {
     if (!input.trim()) return;
 
-    // Add user message
     const newMessage = { sender: "user", text: input };
     setMessages((prev) => [...prev, newMessage]);
     setInput("");
 
-    // Mock bot reply
     setTimeout(() => {
       const reply = { sender: "bot", text: "🤖 " + newMessage.text + " (mock reply)" };
       setMessages((prev) => [...prev, reply]);
@@ -28,6 +38,39 @@ const MainContent: React.FC<MainContentProps> = ({ toggleSidebar }) => {
 
   return (
     <main className="main-content">
+      {/* ✅ Top Header */}
+      <div className="chat-header-top">
+        <h2 className="title">Welcome to AI Assistant</h2>
+        {/* Theme Switcher */}
+      
+      {/* <div style={{ marginTop: 18 }}>
+        <h4 style={{ margin: "8px 0" }}>Choose theme</h4>
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+          {themes.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => setTheme(t.id)}
+              aria-pressed={theme === t.id}
+              className="panel"
+              style={{
+                padding: "8px 10px",
+                borderRadius: 8,
+                border: theme === t.id ? `2px solid var(--accent-strong)` : `1px solid var(--border)`,
+                background: "var(--bg-panel)",
+                color: "var(--text-primary)",
+                cursor: "pointer",
+              }}
+            >
+              <span style={{ marginRight: 8 }}>{t.emoji}</span>
+              {t.label}
+            </button>
+          ))}
+        </div>
+      </div> */}
+       <ThemeSwitcher />
+      </div>
+
+      {/* Existing Header */}
       <header className="main-header">
         <button onClick={toggleSidebar} className="menu-button">
           <MenuIcon />
@@ -35,6 +78,7 @@ const MainContent: React.FC<MainContentProps> = ({ toggleSidebar }) => {
         <div className="header-spacer" />
       </header>
 
+      {/* Chat Content */}
       <div className="content-center">
         <div className="chat-box">
           {messages.map((msg, index) => (
@@ -44,6 +88,7 @@ const MainContent: React.FC<MainContentProps> = ({ toggleSidebar }) => {
           ))}
         </div>
 
+        {/* Input Section */}
         <div className="chat-input-container">
           <input
             type="text"

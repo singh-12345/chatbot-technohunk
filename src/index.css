@@ -1,8 +1,209 @@
-body, html, #root {
+/* body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   overflow: hidden; /* Prevents scrollbars on the body */
+
+
+
+ /* ---------- Base variables (fallback) ---------- */
+:root {
+  --bg-app: #131314;
+  --bg-panel: #1e1f20;
+  --bg-elev: #2d2e30;
+  --text-primary: #e3e3e3;
+  --text-secondary: #bdc1c6;
+  --muted: #9aa0a6;
+  --accent: #10a37f;
+  --accent-strong: #0d8c6b;
+  --header-grad-start: #10a37f;
+  --header-grad-end: #0d8c6b;
+  --user-bubble-bg: #10a37f;
+  --user-bubble-text: #fff;
+  --bot-bubble-bg: #e9ecef;
+  --bot-bubble-text: #222;
+  --input-bg: #141414;
+  --input-text: #eaeaea;
+  --border: #3c4043;
+
+  --radius: 10px;
+  --transition-fast: 200ms ease;
 }
+
+/* ---------- DARK (default) ---------- */
+.theme-dark {
+  --bg-app: #0f1112;
+  --bg-panel: #131416;
+  --bg-elev: #1e1f22;
+  --text-primary: #e6eef0;
+  --text-secondary: #b9c1c6;
+  --muted: #94a0a6;
+  --accent: #10a37f;
+  --accent-strong: #0d8c6b;
+  --header-grad-start: #0fbf8a;
+  --header-grad-end: #107f63;
+  --user-bubble-bg: #10a37f;
+  --user-bubble-text: #fff;
+  --bot-bubble-bg: #222428;
+  --bot-bubble-text: #e6eef0;
+  --input-bg: #141618;
+  --input-text: #e6eef0;
+  --border: #222528;
+
+    --header-grad-start: #202124;
+  --header-grad-end: #3c4043;
+  --header-text: #e3e3e3; /* light text */
+}
+
+/* ---------- LIGHT ---------- */
+.theme-light {
+  --bg-app: #f7f8fa;
+  --bg-panel: #ffffff;
+  --bg-elev: #fbfbfb;
+  --text-primary: #111214;
+  --text-secondary: #4b5259;
+  --muted: #6f7377;
+  --accent: #1a73e8;
+  --accent-strong: #1366d6;
+  --header-grad-start: #1a73e8;
+  --header-grad-end: #0f64d0;
+  --user-bubble-bg: #1a73e8;
+  --user-bubble-text: #ffffff;
+  --bot-bubble-bg: #f1f3f5;
+  --bot-bubble-text: #111214;
+  --input-bg: #ffffff;
+  --input-text: #111214;
+  --border: #e6e7ea;
+
+  --header-grad-start: #f8f9fa;
+  --header-grad-end: #e8eaed;
+  --header-text: #202124; /* dark text */
+}
+
+/* ---------- PINK ---------- */
+.theme-pink {
+  --bg-app: #fff0f7;
+  --bg-panel: #fff2f8;
+  --bg-elev: #ffe6f2;
+  --text-primary: #3a0a1b;
+  --text-secondary: #6b1b3b;
+  --muted: #a64d79;
+  --accent: #d63384;
+  --accent-strong: #ad1457;
+  --header-grad-start: #ff6fb5;
+  --header-grad-end: #d63384;
+  --user-bubble-bg: #d63384;
+  --user-bubble-text: #fff;
+  --bot-bubble-bg: #fff3f8;
+  --bot-bubble-text: #3a0a1b;
+  --input-bg: #fff6fb;
+  --input-text: #3a0a1b;
+  --border: #ffd6ea;
+
+  --header-grad-start: #ff99bb;
+  --header-grad-end: #ff4f87;
+  --header-text: #3a0d1a; /* dark text */
+}
+
+/* ---------- LIGHT GREEN ---------- */
+.theme-lightgreen {
+  --bg-app: #f0fff4;
+  --bg-panel: #f7fff9;
+  --bg-elev: #e6fff0;
+  --text-primary: #053018;
+  --text-secondary: #2a6b4a;
+  --muted: #4b7f63;
+  --accent: #16a34a;
+  --accent-strong: #0f8a3b;
+  --header-grad-start: #6ee7b7;
+  --header-grad-end: #16a34a;
+  --user-bubble-bg: #16a34a;
+  --user-bubble-text: #fff;
+  --bot-bubble-bg: #f0fff4;
+  --bot-bubble-text: #053018;
+  --input-bg: #f6fff7;
+  --input-text: #053018;
+  --border: #c8f2d4;
+    --header-grad-start: #a5d6a7;
+  --header-grad-end: #388e3c;
+  --header-text: #ffffff; /* light text */
+
+}
+
+/* ---------- App-level layout ---------- */
+* { box-sizing: border-box; }
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg-app);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+/* small helpers */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* borders / inputs use variable */
+.border {
+  border: 1px solid var(--border);
+}
+
+/* buttons */
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+/* small util for panels */
+.panel {
+  background: var(--bg-panel);
+  border-radius: 12px;
+  padding: 10px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+/* header gradient helper */
+.header-gradient {
+  background: linear-gradient(90deg, var(--header-grad-start), var(--header-grad-end));
+  color: white;
+}
+
+
+
+        body, html, #root {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: sans-serif;
+            background-color: var(--bg-dark-primary);
+            color: var(--text-primary);
+            overflow: hidden;
+
+        }
+
+        button {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }

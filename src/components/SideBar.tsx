@@ -6,6 +6,7 @@ import {
       PencilIcon,
       PlusIcon
      } from "./Icon";
+import '../styles/sidebar.css'
 
         interface SidebarProps {
             isSidebarOpen: boolean;
