@@ -1,27 +1,20 @@
 import React, { useState } from "react";
 import { MenuIcon } from "./Icon";
 import "../styles/maincontent.css";
-import { useTheme } from "../context/ThemeContext";
-import type  { Theme } from "../context/ThemeContext";
+// import { useTheme } from "../context/ThemeContext";
 import ThemeSwitcher from "./ThemeSwitcher";
 
 interface MainContentProps {
   toggleSidebar: () => void;
 }
 
-const themes: { id: Theme; label: string; emoji: string }[] = [
-  { id: "dark", label: "Dark", emoji: "🌑" },
-  { id: "light", label: "Light", emoji: "☀️" },
-  { id: "pink", label: "Pink", emoji: "🌸" },
-  { id: "lightgreen", label: "Light Green", emoji: "🌿" },
-];
 
 const MainContent: React.FC<MainContentProps> = ({ toggleSidebar }) => {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([
     { sender: "bot", text: "Hello Aman 👋, ask me anything!" },
   ]);
   const [input, setInput] = useState("");
-   const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
 
   const sendMessage = () => {
     if (!input.trim()) return;
